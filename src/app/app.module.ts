@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,18 +15,12 @@ import { CourseComponent } from './courses/course/course.component';
 import { FormsModule } from '@angular/forms';
 
 import { ErrorComponent } from './error/error.component';
+import { CourseGuardService } from './course-guard.service';
+import { AuthService } from './auth.service';
+import { CanDeactivateGuardService } from './candeactivate-guard.service';
+import { CourseResolveService } from './course-reslove.service';
 
 
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'Home', component: HomeComponent},
-  {path: 'About', component: AboutComponent},
-  {path: 'Contact', component: ContactComponent},
-  {path: 'Courses', component: CoursesComponent},
-  {path:'Courses/Course/:id',component:CourseComponent},
-  {path:'**',component:ErrorComponent}
-  
-]
 
 @NgModule({
   declarations: [
@@ -44,10 +38,10 @@ const appRoutes: Routes = [
     
     BrowserModule,
     FormsModule, 
-    RouterModule.forRoot(appRoutes),
     AppRoutingModule
   ],
-  providers: [CoursesService],
+  providers: [CoursesService,CourseGuardService,AuthService,CanDeactivateGuardService,
+    CourseResolveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
